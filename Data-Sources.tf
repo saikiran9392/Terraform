@@ -1,16 +1,12 @@
 # Data sources are used to retrive data from your aws account. It can be your ec2 instance public ip, ami-id, etc..,
 
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-    }
-  }
-}
-
-provider "aws" {
-  region=ap-south-1
-}
+#terraform {
+#  required_providers {
+#    aws = {
+#      source = "hashicorp/aws"
+#    }
+#  }
+#}
 
 resource "aws_instance" "data-demo"{
   ami="ami-0e53db6fd757e38c7"
@@ -23,7 +19,7 @@ resource "aws_instance" "data-demo"{
 data "aws_instance" "data-resource" {
   filter {
     name = "tag:Name"
-    value = "EC2 Terraform"
+    values = ["EC2 Terraform"]
   }
   depends_on = [aws_instance.data-demo]
 }
